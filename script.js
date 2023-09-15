@@ -36,6 +36,15 @@ function rot13(encodedStr) {
   // Only change code below this line
 
   return; //return decodedArr
+
+
+	function rot13(encodedString) {
+  return encodedString.replace(/[A-Z]/g, (char) => {
+    const charCode = char.charCodeAt(0);
+    const base = charCode < 78 ? 65 : 78; // Determine if it's in the first or second half
+    return decodedArr=String.fromCharCode(base + ((charCode - base + 13) % 26));
+  });
+}
 }
 
 // You can test your code by running the above function and printing it to console by pressing the run button at the top. To run it with input 36, uncomment the following line
