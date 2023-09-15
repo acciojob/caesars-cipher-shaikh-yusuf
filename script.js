@@ -35,16 +35,35 @@ function rot13(encodedStr) {
   let decodedArr = []; // Your Result goes here
   // Only change code below this line
 
-  return; //return decodedArr
+ 
+	// Loop through each character in the input string
+  for (let i = 0; i < encodedString.length; i++) {
+    const char = encodedString[i];
 
+    // Check if the character is an uppercase letter (A-Z)
+    if (/[A-Z]/.test(char)) {
+      // Get the ASCII code of the character
+      let charCode = encodedString.charCodeAt(i);
 
-	function rot13(encodedString) {
-  return encodedString.replace(/[A-Z]/g, (char) => {
-    const charCode = char.charCodeAt(0);
-    const base = charCode < 78 ? 65 : 78; // Determine if it's in the first or second half
-    return decodedArr=String.fromCharCode(base + ((charCode - base + 13) % 26));
-  });
-}
+      // Determine if the character is in the first half of the alphabet (A-M) or the second half (N-Z)
+      const isFirstHalf = charCode >= 65 && charCode <= 77;
+      const isSecondHalf = charCode >= 78 && charCode <= 90;
+
+      if (isFirstHalf || isSecondHalf) {
+        // Apply the ROT13 transformation by adding or subtracting 13 from the character's ASCII code
+        charCode += isFirstHalf ? 13 : -13;
+      }
+
+      // Convert the new ASCII code back to a character and add it to the decoded string
+      decodedString += String.fromCharCode(charCode);
+    } else {
+      // If the character is not an uppercase letter, simply add it to the decoded string
+      decodedString += char;
+    }
+  }
+
+  return  decodedArr=decodedString;
+	
 }
 
 // You can test your code by running the above function and printing it to console by pressing the run button at the top. To run it with input 36, uncomment the following line
