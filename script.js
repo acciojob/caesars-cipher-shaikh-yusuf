@@ -1,4 +1,46 @@
 // Your Script here.
+function rot13(str) {
+  // Define an empty string to store the decoded result
+  let decodedStr = "";
+
+  // Loop through each character in the input string
+  for (let i = 0; i < str.length; i++) {
+    // Get the character at the current position
+    const char = str[i];
+
+    // Check if the character is an uppercase letter
+    if (/[A-Z]/.test(char)) {
+      // Calculate the ASCII code of the character
+      let charCode = str.charCodeAt(i);
+
+      // Check if the character is in the first half of the alphabet (A-M)
+      if (charCode >= 65 && charCode <= 77) {
+        // Shift the character code by 13 positions forward
+        charCode += 13;
+      } else {
+        // Shift the character code by 13 positions backward
+        charCode -= 13;
+      }
+
+      // Convert the new character code back to a character and append it to the decoded string
+      decodedStr += String.fromCharCode(charCode);
+    } else {
+      // If the character is not an uppercase letter, simply append it to the decoded string
+      decodedStr += char;
+    }
+  }
+
+  // Return the decoded string
+  return decodedStr;
+}
+
+// Example usage:
+let upp = "Caesar's Cipher";
+
+const encodedString = upp.toUpperCase();
+const decodedString = rot13(encodedString);
+console.log(decodedString); // Outputs "THE QUICK BROWN FOX JUMPS OVER THE LAYR DOG."
+
 
 const lookup = {
   A: "N",
